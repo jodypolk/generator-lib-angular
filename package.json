@@ -6,17 +6,17 @@
     "yeoman-generator",
     "angular"
   ],
-  "homepage": "https://github.com/cgross/generator-cg-angular",
-  "bugs": "https://github.com/cgross/generator-cg-angular/issues",
+  "homepage": "https://github.com/jodypolk/generator-mnc-angular",
+  "bugs": "https://github.com/jodypolk/generator-mnc-angular/issues",
   "author": {
-    "name": "Chris Gross",
-    "email": "schtoo@schtoo.com",
-    "url": "https://github.com/cgross"
+    "name": "Jody Polk",
+    "email": "hello@jodypolk.com",
+    "url": "https://github.com/jodypolk"
   },
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/cgross/generator-cg-angular.git"
+    "url": "git://github.com/jodypolk/generator-mnc-angular.git"
   },
   "scripts": {
     "test": "mocha"
