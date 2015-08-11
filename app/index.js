@@ -10,9 +10,9 @@ var CgangularGenerator = module.exports = function CgangularGenerator(args, opti
     this.on('end', function () {
         this.config.set('partialDirectory','partial/');
         this.config.set('modalDirectory','partial/');
-        this.config.set('directiveDirectory','directive/');
-        this.config.set('filterDirectory','filter/');
-        this.config.set('serviceDirectory','service/');
+        this.config.set('directiveDirectory','components/');
+        this.config.set('filterDirectory','components/');
+        this.config.set('serviceDirectory','components/');
         var inject = {
             js: {
                 file: 'index.html',
@@ -23,6 +23,12 @@ var CgangularGenerator = module.exports = function CgangularGenerator(args, opti
                 relativeToModule: true,
                 file: '<%= module %>.less',
                 marker: cgUtils.LESS_MARKER,
+                template: '@import "<%= filename %>";'
+            },
+            sass: {
+                relativeToModule: true,
+                file: '<%= module %>.scss',
+                marker: cgUtils.SASS_MARKER,
                 template: '@import "<%= filename %>";'
             }
         };
@@ -78,6 +84,34 @@ CgangularGenerator.prototype.askForUiRouter = function askFor() {
         cb();
     }.bind(this));
 };
+
+CgangularGenerator.prototype.askForStyles = function askFor() {
+    var cb = this.async();
+
+    var prompts = [{
+        name: 'styles',
+        type:'list',
+        message: 'How are you going to style this bad boy?',
+        default: 0,
+        choices: ['css','sass','less']
+    }];
+
+    this.prompt(prompts, function (props) {
+        console.log(props);
+        this.precompileCss=false;
+        this.sassy=true;
+        if (props.styles === 'css') {
+            this.precompileCcss = false;
+        } else if (props.styles === "sass") {
+          this.sassy=true;
+        }
+        
+        this.config.set('precompileCss',this.precompileCss);
+        this.config.set('sassy', this.sassy);
+        cb();
+    }.bind(this));
+};
+
 
 CgangularGenerator.prototype.app = function app() {
     this.directory('skeleton/','./');
